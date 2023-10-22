@@ -73,6 +73,7 @@ public sealed class PlaywrightFixture : IAsyncDisposable
             jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WCT).GetInt32(),
             jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WD).GetBoolean());
     }
+    public async Task<byte[]> ScreenshotAsync() => await Page.ScreenshotAsync(ConsoleConstants.PlaywrightOptions.PageScreenshotOptions);
 }
 public sealed class GameState
 {
