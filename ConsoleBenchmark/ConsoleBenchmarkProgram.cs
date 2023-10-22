@@ -48,15 +48,15 @@ public class PlaywrightBenchmark
         await LocalPlaywrightFixture.DisposeAsync();
     }
     [Benchmark]
-    public async Task<JsonElement> Expression1JsonElementEvaluateAsync() => await Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
+    public async Task<JsonElement> Expression1JsonElementEvaluateAsync() => await Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
     [Benchmark]
-    public async Task<string> Expression2StringEvaluateAsync() => await Page.EvaluateAsync<string>(ConsoleConstants.GameStateConstants.GameStateJsStringExpression)!;
+    public async Task<string> Expression2StringEvaluateAsync() => await Page.EvaluateAsync<string>(FixtureConstants.GameStateConstants.GameStateJsStringExpression)!;
     [Benchmark]
-    public async Task<GameState> Expression2StringDeserializeEvaluateAsync() => JsonSerializer.Deserialize<GameState>(await Page.EvaluateAsync<string>(ConsoleConstants.GameStateConstants.GameStateJsStringExpression), ConsoleConstants.PlaywrightOptions.QuickJsonSerializerOptions)!;
+    public async Task<GameState> Expression2StringDeserializeEvaluateAsync() => JsonSerializer.Deserialize<GameState>(await Page.EvaluateAsync<string>(FixtureConstants.GameStateConstants.GameStateJsStringExpression), FixtureConstants.PlaywrightOptions.QuickJsonSerializerOptions)!;
     [Benchmark]
     public async Task<GameState> Expression1JsonElementDeserializeEvaluateAsync()
     {
-        JsonElement jsonElement = await Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
+        JsonElement jsonElement = await Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
             bool wbp = false;
             int wct = 0;
             bool wd = false;
@@ -64,13 +64,13 @@ public class PlaywrightBenchmark
             {
                 switch (prop.Name)
                 {
-                    case ConsoleConstants.GameStateConstants.WBP:
+                    case FixtureConstants.GameStateConstants.WBP:
                         wbp = prop.Value.GetBoolean();
                         break;
-                    case ConsoleConstants.GameStateConstants.WCT:
+                    case FixtureConstants.GameStateConstants.WCT:
                         wct = prop.Value.GetInt32();
                         break;
-                    case ConsoleConstants.GameStateConstants.WD:
+                    case FixtureConstants.GameStateConstants.WD:
                         wd = prop.Value.GetBoolean();
                         break;
                 }
@@ -80,22 +80,22 @@ public class PlaywrightBenchmark
     [Benchmark]
     public async Task<GameState> Expression1JsonElementGetPropertyDeserializeEvaluateAsync()
     {
-        JsonElement jsonElement = await Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
-        return new GameState(jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WBP).GetBoolean(),
-            jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WCT).GetInt32(),
-            jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WD).GetBoolean());
+        JsonElement jsonElement = await Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
+        return new GameState(jsonElement.GetProperty(FixtureConstants.GameStateConstants.WBP).GetBoolean(),
+            jsonElement.GetProperty(FixtureConstants.GameStateConstants.WCT).GetInt32(),
+            jsonElement.GetProperty(FixtureConstants.GameStateConstants.WD).GetBoolean());
     }
 
     [Benchmark]
-    public async Task<JsonElement> LocalExpression1JsonElementEvaluateAsync() => await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
+    public async Task<JsonElement> LocalExpression1JsonElementEvaluateAsync() => await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
     [Benchmark]
-    public async Task<string> LocalExpression2StringEvaluateAsync() => await LocalPlaywrightFixture.Page.EvaluateAsync<string>(ConsoleConstants.GameStateConstants.GameStateJsStringExpression)!;
+    public async Task<string> LocalExpression2StringEvaluateAsync() => await LocalPlaywrightFixture.Page.EvaluateAsync<string>(FixtureConstants.GameStateConstants.GameStateJsStringExpression)!;
     [Benchmark]
-    public async Task<GameState> LocalExpression2StringDeserializeEvaluateAsync() => JsonSerializer.Deserialize<GameState>(await LocalPlaywrightFixture.Page.EvaluateAsync<string>(ConsoleConstants.GameStateConstants.GameStateJsStringExpression), ConsoleConstants.PlaywrightOptions.QuickJsonSerializerOptions)!;
+    public async Task<GameState> LocalExpression2StringDeserializeEvaluateAsync() => JsonSerializer.Deserialize<GameState>(await LocalPlaywrightFixture.Page.EvaluateAsync<string>(FixtureConstants.GameStateConstants.GameStateJsStringExpression), FixtureConstants.PlaywrightOptions.QuickJsonSerializerOptions)!;
     [Benchmark]
     public async Task<GameState> LocalExpression1JsonElementDeserializeEvaluateAsync()
     {
-        JsonElement jsonElement = await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
+        JsonElement jsonElement = await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
         bool wbp = false;
         int wct = 0;
         bool wd = false;
@@ -103,13 +103,13 @@ public class PlaywrightBenchmark
         {
             switch (prop.Name)
             {
-                case ConsoleConstants.GameStateConstants.WBP:
+                case FixtureConstants.GameStateConstants.WBP:
                     wbp = prop.Value.GetBoolean();
                     break;
-                case ConsoleConstants.GameStateConstants.WCT:
+                case FixtureConstants.GameStateConstants.WCT:
                     wct = prop.Value.GetInt32();
                     break;
-                case ConsoleConstants.GameStateConstants.WD:
+                case FixtureConstants.GameStateConstants.WD:
                     wd = prop.Value.GetBoolean();
                     break;
             }
@@ -119,10 +119,10 @@ public class PlaywrightBenchmark
     [Benchmark]
     public async Task<GameState> LocalExpression1JsonElementGetPropertyDeserializeEvaluateAsync()
     {
-        JsonElement jsonElement = await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(ConsoleConstants.GameStateConstants.GameStateJsObjectExpression);
-        return new GameState(jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WBP).GetBoolean(),
-            jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WCT).GetInt32(),
-            jsonElement.GetProperty(ConsoleConstants.GameStateConstants.WD).GetBoolean());
+        JsonElement jsonElement = await LocalPlaywrightFixture.Page.EvaluateAsync<JsonElement>(FixtureConstants.GameStateConstants.GameStateJsObjectExpression);
+        return new GameState(jsonElement.GetProperty(FixtureConstants.GameStateConstants.WBP).GetBoolean(),
+            jsonElement.GetProperty(FixtureConstants.GameStateConstants.WCT).GetInt32(),
+            jsonElement.GetProperty(FixtureConstants.GameStateConstants.WD).GetBoolean());
     }
 }
 
